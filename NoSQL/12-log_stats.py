@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """
+12-log_stats.py
 Script that provides statistics about Nginx logs stored in MongoDB.
 """
 
@@ -11,12 +12,12 @@ if __name__ == "__main__":
     nginx = db.nginx
 
     total_logs = nginx.count_documents({})
-    print(f"{total_logs} logs")
+    print("{} logs".format(total_logs))
 
     print("Methods:")
     for method in ["GET", "POST", "PUT", "PATCH", "DELETE"]:
         count = nginx.count_documents({"method": method})
-        print(f"\tmethod {method}: {count}")
+        print("\tmethod {}: {}".format(method, count))
 
     status_count = nginx.count_documents({"method": "GET", "path": "/status"})
-    print(f"{status_count} status check")
+    print("{} status check".format(status_count))
